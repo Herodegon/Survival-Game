@@ -7,9 +7,7 @@
 #include <cstdlib>
 #include <ctime>
 
-#include "Character.h"
-
-Land* BuildMap(size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20);
+#include "../Entity/Character.h"
 
 enum LandTypes {LAKE, FOREST, DESERT, MAX_LAND_TYPES};
 

@@ -3,56 +3,45 @@
 
 #include "Entity.h"
 
-enum CharChoice {NORTH, SOUTH, EAST, WEST};
+//Player's Options Per Turn
+enum PlayerChoice {MOVE, LOOK, USE, HELP};
+
+//Player's Options for Movement
+enum Choice_Move {NORTH, SOUTH, EAST, WEST};
+
+/*********************************************************/
 
 class Character : public Entity {
     public:
-        virtual bool Turn() = 0;
-        
-        bool IsAlive() const = {return health;}
+        virtual void Turn() = 0;
+    
+        bool IsAlive() const {return health;}
     
     protected:
         unsigned int health;
 };
 
+/*********************************************************/
+
 class Player : public Character {
     public:
-        Player(unsigned int health, unsigned int hunger, unsigned int thirst) {
+        Player(unsigned int health = 3, unsigned int hunger = 5, unsigned int thirst = 5) {
             this->health = health;
             this->hunger = hunger;
             this->thirst = thirst;
         }
         
         //Give Options and Get Player Input
-        bool Turn() {
-            char playerStr;
+        void Turn() {
+            std::string userChoice;
             
-            std::cout << "What will you do?\n"
-                      << "Enter \'N\', \'S\', \'E\', or \'W\'.\n";
+            std::cout << "What will you do?\n";
             
-            std::cin >> playerStr;
-            switch(playerStr) {
-                case 'N':
-                    playerChoice = NORTH;
-                    break;
-                    
-                case 'S':
-                    playerChoice = SOUTH;
-                    break;
-                    
-                case 'E':
-                    playerChoice = EAST;
-                    break;
-                    
-                case 'W':
-                    playerChoice = WEST;
-                    break;
-            }
+            std::cin >> userChoice;
+            
+            //TODO: Rethink Player Options; REMOVE
             
             //End of Turn
-            switch(playerChoice) {
-                case NORTH:
-            
             hunger--; //Lose 1 Hunger
             thirst--; //Lose 1 Thirst
         }
@@ -71,8 +60,6 @@ class Player : public Character {
     private:
         unsigned int hunger;
         unsigned int thirst;
-        
-        CharChoice playerChoice;
         
         unsigned int playerCoord[2] = {0, 0};
 };
