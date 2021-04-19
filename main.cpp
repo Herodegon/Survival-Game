@@ -44,11 +44,11 @@ enum MapSize {
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
 
-//!TODO: FIX MAP GENERATOR; REMOVE
-void BuildMap(Land *map, size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20) {
-    map = new Land[MAP_SIZE_X][MAP_SIZE_Y];
-    playerSpawn_X = rand() % MAP_SIZE_X;
-    playerSpawn_Y = rand() % MAP_SIZE_Y;
+/*!TODO: FIX MAP GENERATOR; REMOVE
+void BuildMap(Player player, size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20) {
+    Land* map[MAP_SIZE_X][MAP_SIZE_Y];
+    unsigned int playerSpawn_X = rand() % MAP_SIZE_X;
+    unsigned int playerSpawn_Y = rand() % MAP_SIZE_Y;
     
     for(size_t i = 0; i < MAP_SIZE_Y; i++) {
         for(size_t j = 0; j < MAP_SIZE_X; j++) {
@@ -60,6 +60,7 @@ void BuildMap(Land *map, size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20) {
         }
     }
 }
+*/
 
 int main() {
     srand(time(NULL));
@@ -100,10 +101,27 @@ int main() {
     
     //Declare Map and Player
     Land *map[MAP_SIZE_X][MAP_SIZE_Y];
-    Character *player = new Player;
+    Player player;
     
     //Generate Game Map
-    BuildMap(map);
+    
+    //!BuildMap(map);       //TODO: FIX FUNCTION; REMOVE
+    
+    //!Temporary Placeholder for 'BuildMap()' Function
+    Land* map[MAP_SIZE_X][MAP_SIZE_Y];
+    
+    unsigned int playerSpawn_X = rand() % MAP_SIZE_X;
+    unsigned int playerSpawn_Y = rand() % MAP_SIZE_Y;
+    
+    for(size_t i = 0; i < MAP_SIZE_Y; i++) {
+        for(size_t j = 0; j < MAP_SIZE_X; j++) {
+            map[i][j] = new Lake;
+            
+            if((i == playerSpawn_Y) && (j == playerSpawn_X)) {
+                player.SetCoord(i, j);
+            }
+        }
+    }
     
     //---GAME START---
     std::cout << "You wake up in a "

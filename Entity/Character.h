@@ -15,6 +15,8 @@ class Character : public Entity {
         //Adjust Character Health
         void SetHealth(unsigned int health) {this->health = health;}
         
+        unsigned int GetHealth() {return health;}
+        
         //Character Health Check
         bool IsAlive() const {return health;}
         
@@ -40,28 +42,32 @@ class Character : public Entity {
 /*********************************************************/
 
 enum Stats {HEALTH, HUNGER, THIRST};
+enum StatChanges {UPGRADE, DOWNGRADE};
 
 class Player : public Character {
     public:
-        Player(unsigned int health = DEFAULT_HEALTH, 
-               unsigned int hunger = DEFAULT_HUNGER, 
-               unsigned int thirst = DEFAULT_THIRST) {
-            
-            this->health = health;
-            maxHealth = health;
-            
-            this->hunger = hunger;
-            maxHunger = hunger;
-            
-            this->thirst = thirst;
-            maxThirst = thirst;
-        }
+        Player();
+        
+        Player(unsigned int health, 
+               unsigned int hunger, 
+               unsigned int thirst);
         
         //Give Options and Get Player Input
         void Turn();
         
-        //Upgrade Player Stat
-        void UpgradeStat(Stats playerStat);
+        //Use Player Stats
+        void SetHunger(unsigned int hunger) {this->hunger = hunger;}
+        void SetThirst(unsigned int thirst) {this->thirst = thirst;}
+        
+        unsigned int GetHunger() {return hunger;}
+        unsigned int GetThirst() {return thirst;}
+        
+        unsigned int GetMaxHealth() {return maxHealth;}
+        unsigned int GetMaxHunger() {return maxHunger;}
+        unsigned int GetMaxThirst() {return maxThirst;}
+        
+        //Upgrade Stats
+        void MaxStatChange(StatChanges changeType, Stats stat);
         
         //Output Player Stats
         void PrintStats();

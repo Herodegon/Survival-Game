@@ -2,9 +2,9 @@
 
 enum LandTypes {LAKE, FOREST, DESERT, MAX_LAND_TYPES};
 
-Land* getRandomLand() {
+Land* GetRandomLand() {
     srand(time(NULL));
-    LandTypes selection = rand() % MAX_LAND_TYPES;
+    LandTypes selection = (LandTypes)(rand() % MAX_LAND_TYPES);
     
     switch(selection) {
         case LAKE:
@@ -22,6 +22,7 @@ Land* getRandomLand() {
     }
 }
 
+/*!TODO: FIX PRINT FUNCTION
 void Print(Land **map, Player &player) {
     std::ostringstream thisMap;
             
@@ -43,6 +44,7 @@ void Print(Land **map, Player &player) {
     //Output Final Map
     std::cout << thisMap.str() << std::endl;
 }
+*/
 
 /************************************************************/
 
@@ -54,29 +56,29 @@ std::string Lake::GetLongDesc() const {
     return "You arrive at a large lake. ";
 }
 
-std::string Lake::Visit(Player &player) {
+void Lake::Visit(Player &player) {
     int chance = rand() % 4;
     
     switch(chance) {
         case 0:
             std::cout << "The lake is freshwater. You take a sip and "
                       << "restore your thirst.\n";
-            thirst = maxThirst;
+            player.SetThirst(player.GetMaxThirst());
             break;
         case 1:
             std::cout << "There's greenery surrounding the lake.\n";
             
-            chance = rand() % 2
+            chance = rand() % 2;
             switch(chance) {
                 case 0:
                     std::cout << "They're covered in fruits and berries. "
                               << "You grab what you can.\n";
-                    hunger = maxHunger;
+                    player.SetHunger(player.GetMaxHunger());
                     break;
                 case 1:
                     std::cout << "You spot a few bushes with berries on "
                               << "them. You take what little they have.\n";
-                    hunger++;
+                    player.SetHunger(player.GetHunger()+1);
                     break;
             }
             break;
@@ -90,32 +92,38 @@ std::string Lake::Visit(Player &player) {
                       << "Do you \'S\'neak or \'R\'un?\n";
             char userInput;
             
-            switch(userInput.at(0)) {
-                case 'S':
-                    std::cout << "You try to sneak past the bear. ";
-                    
-                    chance = rand() % 2;
-                    switch(chance) {
-                        case 0:
-                            std::cout << "It works, and you manage to get "
-                                      << "a good fill of water before making "
-                                      << "your way to safety.\n";
-                            thirst = maxThirst;
-                            break;
-                        case 1:
-                            std::cout << "You're spotted by the bear and "
-                                      << "attacked. You take a lot of damage "
-                                      << "trying to get away.\n";
-                            health--;
-                            break;
-                    }
-                    break;
-                case 'R':
-                    std::cout << "You run as far away from the lake as you "
-                              << "can before you decide it's safe enough "
-                              << "to stop.\n";
-                    break;
-            }
+            do {
+                switch(userInput) {
+                    case 'S':
+                        std::cout << "You try to sneak past the bear. ";
+                        
+                        chance = rand() % 2;
+                        switch(chance) {
+                            case 0:
+                                std::cout << "It works, and you manage to get "
+                                          << "a good fill of water before making "
+                                          << "your way to safety.\n";
+                                player.SetThirst(player.GetMaxThirst());
+                                break;
+                            case 1:
+                                std::cout << "You're spotted by the bear and "
+                                          << "attacked. You take a lot of damage "
+                                          << "trying to get away.\n";
+                                player.SetHealth(player.GetHealth()-1);
+                                break;
+                        }
+                        break;
+                    case 'R':
+                        std::cout << "You run as far away from the lake as you "
+                                  << "can before you decide it's safe enough "
+                                  << "to stop.\n";
+                        break;
+                    default:
+                        std::cout << "Please enter \'S\' or \'R\'.\n";
+                        userInput = '!'; //Input Error Flag
+                        break;
+                }
+            } while(userInput != '!');
     }
 }
 
