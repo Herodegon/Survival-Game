@@ -71,6 +71,6 @@ class Mountain : public Land {
         char symbol = 'M';
 };
 
-Land* GetRandomLand(void);
+Land* GetRandomLand();
 
 #endif

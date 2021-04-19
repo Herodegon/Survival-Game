@@ -29,17 +29,7 @@
 
 #include <iostream>
 
-#include "Entity/Character.h"
-#include "Land/Land.h"
-
-enum MapSize {
-    SMALL = 5,
-    MEDIUM = 10,
-    LARGE = 15,
-    XLARGE = 20,
-    
-    UNDECLARED = -1
-};
+#include "Map/Map.h"
 
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
@@ -66,12 +56,13 @@ void BuildMap(Player player, size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20) {
 //!TODO: Create Class for Maps
 
 int main() {
+    /*!Moved To Seperate Class
     srand(time(NULL));
     std::string userChoice;
     
     //Declare Map Size
-    unsigned int MAP_SIZE_X = 20;
-    unsigned int MAP_SIZE_Y = 20;
+    unsigned int size_X = 20;
+    unsigned int size_Y = 20;
     
     MapSize sizeChoice = UNDECLARED;
     
@@ -101,19 +92,15 @@ int main() {
     
     MAP_SIZE_X = (rand() % 10) + sizeChoice;
     MAP_SIZE_Y = (rand() % 10) + sizeChoice;
-    
-    //!TEST mapsize; REMOVE
-    std::cout << "Map Size X: " << MAP_SIZE_X << std::endl
-              << "Map Size Y: " << MAP_SIZE_Y << std::endl;
+    */
     
     //Declare Map and Player
-    Land *map[MAP_SIZE_X][MAP_SIZE_Y];
     Player player;
+    Map map(player);
     
     //Generate Game Map
     
-    //!BuildMap(map);       //TODO: FIX FUNCTION
-    
+    /*!Moved to Seperate Class
     //Create random coordinate for player spawn
     unsigned int playerSpawn_X = rand() % MAP_SIZE_X;
     unsigned int playerSpawn_Y = rand() % MAP_SIZE_Y;
@@ -127,20 +114,18 @@ int main() {
             
             map[k][i] = new Lake;
             
-            /*Once on playerSpawn coordinate, set player coordinate
-            if((i == playerSpawn_Y) && (k == playerSpawn_X)) {
-                player.SetCoord(i, k);
-            }
-            */
-            
             //!TEST failsafe; REMOVE
             if(k > 100) {
                 break;
             }
         }
     }
+    */
     
-    //---GAME START---
+    std::cout << "Execution Success!\n";
+    return 0;
+    
+    /*---GAME START---
     Clear();
     
     std::cout << "You wake up in a "
@@ -178,4 +163,5 @@ int main() {
     } while(player.IsAlive());
     
     return 0;
+    */
 }
