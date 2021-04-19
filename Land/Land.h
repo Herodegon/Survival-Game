@@ -17,9 +17,6 @@ class Land {
         virtual char GetSymbol() const = 0;
         
         virtual void Visit(Player &player) = 0;
-        
-        //Output Map Visual
-        void Print(Land **map, Player &player);
 };
 
 class Lake : public Land {

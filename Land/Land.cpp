@@ -137,6 +137,11 @@ std::string Forest::GetLongDesc() const {
     return "You arrive at a thick brush of trees. ";
 }
 
+//!TODO: FINISH VISIT FUNCTION
+void Forest::Visit(Player &player) {
+    
+}
+
 /************************************************************/
 
 std::string Desert::GetShortDesc() const {
@@ -145,4 +150,9 @@ std::string Desert::GetShortDesc() const {
 
 std::string Desert::GetLongDesc() const {
     return "You arrive at a vast desert. ";
+}
+
+//!TODO: FINISH VISIT FUNCTION
+void Desert::Visit(Player &player) {
+    
 }

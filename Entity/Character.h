@@ -66,6 +66,13 @@ class Player : public Character {
         unsigned int GetMaxHunger() {return maxHunger;}
         unsigned int GetMaxThirst() {return maxThirst;}
         
+        //Player Info
+        void SetName(std::string name) {this->name = name;}
+        
+        std::string GetName() const {return name;}
+        std::string GetDesc() const {return desc;}
+        char GetSymbol() const {return symbol;}
+        
         //Upgrade Stats
         void MaxStatChange(StatChanges changeType, Stats stat);
         
@@ -87,6 +94,10 @@ class Player : public Character {
         unsigned int maxThirst;
         
         unsigned int playerCoord[2] = {0, 0};
+        
+        std::string name;
+        std::string desc = "The Player";
+        char symbol = '@';
 };
 
 #endif
