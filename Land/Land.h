@@ -9,8 +9,6 @@
 
 #include "../Entity/Character.h"
 
-enum LandTypes {LAKE, FOREST, DESERT, MAX_LAND_TYPES};
-
 class Land {    
     public:
         //Descriptions
@@ -22,6 +20,10 @@ class Land {
         
         //Output Map Visual
         void Print(Land **map, Player &player);
+        
+        //Dimension Variables
+        unsigned int MAP_SIZE_X = 20;
+        unsigned int MAP_SIZE_Y = 20;
 };
 
 class Lake : public Land {
@@ -62,5 +64,20 @@ class Desert : public Land {
     private:
         char symbol = 'D';
 };
+
+class Mountain : public Land {
+    public:
+        //Descriptions
+        std::string GetShortDesc() const;
+        std::string GetLongDesc() const;
+        char GetSymbol() const {return symbol;}
+        
+        std::string Visit(Player &player);
+        
+    private:
+        char symbol = 'D';
+};
+
+Land* RandomEvent(void);
 
 #endif

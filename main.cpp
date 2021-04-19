@@ -44,7 +44,7 @@ enum MapSize {
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
 
-//TODO: FIX MAP GENERATOR; REMOVE
+//!TODO: FIX MAP GENERATOR; REMOVE
 void BuildMap(Land *map, size_t MAP_SIZE_X = 20, size_t MAP_SIZE_Y = 20) {
     map = new Land[MAP_SIZE_X][MAP_SIZE_Y];
     playerSpawn_X = rand() % MAP_SIZE_X;
