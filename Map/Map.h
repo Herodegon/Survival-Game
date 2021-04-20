@@ -14,21 +14,22 @@ class Map {
                       << "Map Size Y: " << map_Y << std::endl;
             
             //Create Map Array Using Size Parameters
-            Land *map[map_X][map_Y];
-            this->map = **&map;
+            map.resize(map_X);
+            for(size_t i = 0; i < map_X; i++) {
+                map[i].resize(map_Y);
+            }
             
             //Generate Lands on Map
             BuildMap(player);
         }
         
-        //Access Member for Locations on Map
-        Land *At(unsigned int x, unsigned int y) {return &map[x][y];} 
+        Land* At(unsigned int x, unsigned int y) {return map[x][y].get();}
         
         //Print Map in ASCII Characters
         void Print(Player &player);
     
     private:
-        Land **map;
+        std::vector<std::vector<std::unique_ptr<Land>>> map;
         
         unsigned int map_X;
         unsigned int map_Y;

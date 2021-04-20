@@ -67,10 +67,10 @@ void Map::BuildMap(Player &player) {
             //!TEST iteration; REMOVE
             std::cout << "BuildMap [" << k << "][" << i << "]" << std::endl;
             
-            map[k][i] = *GetRandomLand();
+            map[k][i] = GetRandomLand();
             
             //!TEST land; REMOVE
-            std::cout << "Symbol: \'" << map[k][i].GetSymbol() << "\'" << std::endl
+            std::cout << "Symbol: \'" << map[k][i]->GetSymbol() << "\'" << std::endl
                       << std::endl;
             
             //!TEST failsafe; REMOVE
@@ -92,7 +92,7 @@ void Map::Print(Player &player) {
                 
             //!TEST loop; REMOVE
             std::cout << "Iteration [" << k << "][" << i << "]" << std::endl
-                      << "Symbol: \'" << map[k][i].GetSymbol() << "\'" << std::endl
+                      << "Symbol: \'" << map[k][i]->GetSymbol() << "\'" << std::endl
                       << std::endl;
             
             if((player.GetX() == k) && (player.GetY() == i)) {
@@ -100,7 +100,7 @@ void Map::Print(Player &player) {
             }
             //If not, output normal map space
             else {
-                thisMap << map[k][i].GetSymbol();
+                thisMap << map[k][i]->GetSymbol();
             }
         }
         thisMap << std::endl;

@@ -2,19 +2,19 @@
 
 enum LandTypes {LAKE, FOREST, DESERT, MAX_LAND_TYPES};
 
-Land* GetRandomLand() {
+std::unique_ptr<Land> GetRandomLand() {
     srand(time(NULL));
     LandTypes selection = (LandTypes)(rand() % MAX_LAND_TYPES);
     
     switch(selection) {
         case LAKE:
-            return new Lake;
+            return std::make_unique<Lake>();
         case FOREST:
-            return new Forest;
+            return std::make_unique<Forest>();
         case DESERT:
-            return new Desert;
+            return std::make_unique<Desert>();
         default:
-            return new Forest;
+            return std::make_unique<Forest>();
     }
 }
 

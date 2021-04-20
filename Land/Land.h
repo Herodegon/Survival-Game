@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 #include <memory>
 
 #include "../Entity/Character.h"
@@ -72,6 +73,6 @@ class Mountain : public Land {
         char symbol = 'M';
 };
 
-Land* GetRandomLand();
+std::unique_ptr<Land> GetRandomLand();
 
 #endif
