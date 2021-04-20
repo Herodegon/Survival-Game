@@ -1,11 +1,5 @@
 #include "Character.h"
 
-//Player's Options Per Turn
-enum PlayerChoice {MOVE, LOOK, USE, HELP};
-
-//Player's Options for Movement
-enum Choice_Move {NORTH, SOUTH, EAST, WEST};
-
 /*********************************************************/
 
 Player::Player() {
@@ -35,19 +29,51 @@ Player::Player(unsigned int health,
 }
 
 void Player::Turn() {
-    std::string userInput;
-            
-    std::cout << "What will you do?\n";
-    getline(std::cin, userInput);
+    playerChoice = NOT_SPECIFIED;
+    choiceValue = -1;
+    char userInput;
     
-    std::string str;
-    str = 
-            
-    //TODO: Rethink Player Options; REMOVE
-            
-    //End of Turn
-    hunger--; //Lose 1 Hunger
-    thirst--; //Lose 1 Thirst
+    do {    
+        std::cout << "What do you want to do?\n"
+                  << "Choose \'M\'ove or \'H\'elp for more info.\n";
+        
+        std::cin >> userInput;
+        switch(userInput) {
+            case 'M':
+                playerChoice = MOVE;
+                
+                do {
+                    std::cout << "Choose a direction: "
+                              << "\'N\'orth, \'S\'outh, \'E\'ast, \'W\'est.\n";
+                              
+                    std::cin >> userInput;
+                    switch(userInput) {
+                        case 'N':
+                            choiceValue = NORTH;
+                            break;
+                        case 'S':
+                            choiceValue = SOUTH;
+                            break;
+                        case 'E':
+                            choiceValue = EAST;
+                            break;
+                        case 'W':
+                            choiceValue = WEST;
+                            break;
+                        default:
+                            std::cout << "Please choose one of the options.\n";
+                            break;
+                    }
+                } while(choiceValue == -1);
+                break;
+            case 'H':
+                std::cout << "For now, you can only \'M\'ove. Sorry :(\n";
+                break;
+            default:
+                std::cout << "Please choose an appropriate command.\n";
+                break;
+        }
+    } while(playerChoice == NOT_SPECIFIED);
 }
 
 void Player::MaxStatChange(StatChanges changeType, Stats stat) {

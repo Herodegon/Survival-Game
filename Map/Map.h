@@ -3,6 +3,8 @@
 
 #include "../Land/Land.h"
 
+enum Direction {NORTH, SOUTH, EAST, WEST};
+
 class Map {
     public:
         Map(Player &player) {
@@ -23,7 +25,11 @@ class Map {
             BuildMap(player);
         }
         
+        //Access Function for Lands in Map
         Land* At(unsigned int x, unsigned int y) {return map[x][y].get();}
+        
+        //Move Character Across Map
+        void Move(Character *_char, Direction dir);
         
         //Print Map in ASCII Characters
         void Print(Player &player);

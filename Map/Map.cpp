@@ -81,6 +81,52 @@ void Map::BuildMap(Player &player) {
     }
 }
 
+void Map::Move(Character *_char, Direction dir) {
+    
+    switch(dir) {
+        case NORTH:
+            //If player is not at the top of the map
+            if(!(_char->GetY() == (map.size() - 1) )) {
+                _char->SetY(_char->GetY() + 1);
+            }
+            //Else, set them at the bottom
+            else {
+                _char->SetY(0);
+            }
+            break;
+        case SOUTH:
+            //If player is not at the bottom of the map
+            if(!(_char->GetY() == 0)) {
+                _char->SetY(_char->GetY() - 1);
+            }
+            //Else, set them at the top
+            else {
+                _char->SetY(map.size() - 1);
+            }
+            break;
+        case EAST:
+            //If player is not at the far right of the map
+            if(!(_char->GetX() == (map[_char->GetX()].size() - 1) )) {
+                _char->SetX(_char->GetX() + 1);
+            }
+            //Else, set them at the far left
+            else {
+                _char->SetX(0);
+            }
+            break;
+        case WEST:
+            //If player is not at the far left of the map
+            if(!(_char->GetX() == 0)) {
+                _char->SetX(_char->GetX() - 1);
+            }
+            //Else, set them at the far right
+            else {
+                _char->SetX(map[_char->GetX()].size() - 1);
+            }
+            break;
+    }
+}
+
 void Map::Print(Player &player) {
     std::ostringstream thisMap;
     

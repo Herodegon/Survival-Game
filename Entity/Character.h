@@ -1,8 +1,6 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 
-#include <algorithm>
-
 #include "Entity.h"
 
 enum CharacterTypes {PLAYER, ANIMAL, NPC, MAX_NUM_CHARS};
@@ -41,8 +39,15 @@ class Character : public Entity {
 
 /*********************************************************/
 
+//Player Stats
 enum Stats {HEALTH, HUNGER, THIRST};
 enum StatChanges {UPGRADE, DOWNGRADE};
+
+//Player Actions
+enum Choices {MOVE, HELP, MAX_CHOICES, NOT_SPECIFIED = -1};
+
+//Player's Options for Movement
+enum Choices_Move {NORTH, SOUTH, EAST, WEST};
 
 class Player : public Character {
     public:
@@ -55,16 +60,18 @@ class Player : public Character {
         //Give Options and Get Player Input
         void Turn();
         
+        Choices GetChoice() const {return playerChoice;}
+        
         //Use Player Stats
         void SetHunger(unsigned int hunger) {this->hunger = hunger;}
         void SetThirst(unsigned int thirst) {this->thirst = thirst;}
         
-        unsigned int GetHunger() {return hunger;}
-        unsigned int GetThirst() {return thirst;}
+        unsigned int GetHunger() const {return hunger;}
+        unsigned int GetThirst() const {return thirst;}
         
-        unsigned int GetMaxHealth() {return maxHealth;}
-        unsigned int GetMaxHunger() {return maxHunger;}
-        unsigned int GetMaxThirst() {return maxThirst;}
+        unsigned int GetMaxHealth() const {return maxHealth;}
+        unsigned int GetMaxHunger() const {return maxHunger;}
+        unsigned int GetMaxThirst() const {return maxThirst;}
         
         //Player Info
         void SetName(std::string name) {this->name = name;}
@@ -94,6 +101,8 @@ class Player : public Character {
         unsigned int maxThirst;
         
         unsigned int playerCoord[2] = {0, 0};
+        Choices playerChoice = NOT_SPECIFIED;
+        int choiceValue = -1;
         
         std::string name;
         std::string desc = "The Player";

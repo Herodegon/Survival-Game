@@ -1,10 +1,12 @@
 #include "Land.h"
 
-enum LandTypes {LAKE, FOREST, DESERT, MAX_LAND_TYPES};
+enum LandTypes {LAKE, FOREST, DESERT, PLAINS, CAVE, MAX_LAND_TYPES};
 
 std::unique_ptr<Land> GetRandomLand() {
-    srand(time(NULL));
     LandTypes selection = (LandTypes)(rand() % MAX_LAND_TYPES);
+    
+    //!TEST selection; REMOVE
+    std::cout << "Selection: " << selection << std::endl;
     
     switch(selection) {
         case LAKE:
@@ -13,34 +15,14 @@ std::unique_ptr<Land> GetRandomLand() {
             return std::make_unique<Forest>();
         case DESERT:
             return std::make_unique<Desert>();
+        case PLAINS:
+            return std::make_unique<Plains>();
+        case CAVE:
+            return std::make_unique<Cave>();
         default:
             return std::make_unique<Forest>();
     }
 }
-
-/*!TODO: FIX PRINT FUNCTION
-void Print(Land **map, Player &player) {
-    std::ostringstream thisMap;
-            
-    //Add Land Symbols to Map
-    for(size_t i = 0; i < MAP_SIZE_Y; i++) {
-        for(size_t k = 0; k < MAP_SIZE_X; k++) {
-            //Check if current coord is player
-            if((player.GetX() == k) && (player.GetY() == i)) {
-                thisMap << player.GetSymbol();
-            }
-            //If not, output normal map space
-            else {
-                thisMap << map[k][i].GetSymbol();
-            }
-        }
-        thisMap << std::endl;
-    }
-    
-    //Output Final Map
-    std::cout << thisMap.str() << std::endl;
-}
-*/
 
 /************************************************************/
 
@@ -150,5 +132,35 @@ std::string Desert::GetLongDesc() const {
 
 //!TODO: FINISH VISIT FUNCTION
 void Desert::Visit(Player &player) {
+    
+}
+
+/************************************************************/
+
+std::string Plains::GetShortDesc() const {
+    return "Desert";
+}
+
+std::string Plains::GetLongDesc() const {
+    return "You arrive at a vast desert. ";
+}
+
+//!TODO: FINISH VISIT FUNCTION
+void Plains::Visit(Player &player) {
+    
+}
+
+/************************************************************/
+
+std::string Cave::GetShortDesc() const {
+    return "Desert";
+}
+
+std::string Cave::GetLongDesc() const {
+    return "You arrive at a vast desert. ";
+}
+
+//!TODO: FINISH VISIT FUNCTION
+void Cave::Visit(Player &player) {
     
 }

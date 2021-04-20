@@ -73,6 +73,32 @@ class Mountain : public Land {
         char symbol = 'M';
 };
 
+class Plains : public Land {
+    public:
+        //Descriptions
+        std::string GetShortDesc() const;
+        std::string GetLongDesc() const;
+        char GetSymbol() const {return symbol;}
+        
+        void Visit(Player &player);
+        
+    private:
+        char symbol = 'P';
+};
+
+class Cave : public Land {
+    public:
+        //Descriptions
+        std::string GetShortDesc() const;
+        std::string GetLongDesc() const;
+        char GetSymbol() const {return symbol;}
+        
+        void Visit(Player &player);
+        
+    private:
+        char symbol = 'C';
+};
+
 std::unique_ptr<Land> GetRandomLand();
 
 #endif
