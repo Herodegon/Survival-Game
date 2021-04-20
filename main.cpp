@@ -32,16 +32,7 @@
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
 
-void Turn(Player &player, Map &map) {
-    player.Turn();
-    
-    switch(player.GetChoice()) {
-        case 0:
-            break;
-    }
-            
-    Map(player, player.GetSubchoice());
-}
+void Turn(Player &player, Map &map);
 
 int main() {
     srand(time(NULL));
@@ -59,17 +50,44 @@ int main() {
               << map.At(player.GetX(), player.GetY())->GetShortDesc()
               << " with no memory of how you got there.\n" << std::endl;
               
-    //!TEST Current Limits | End Of Program; REMOVE
+    /*!TEST Current Limits | End Of Program; REMOVE
     std::cout << std::endl
               << "Execution Successful!\n";
     return 0;
+    */
     
-    /*
-    do {  
-        //Player Turn
-        player.Turn();
+    do {
+        Turn(player, map);
+        
+        /*!TEST End of File; REMOVE
+        std::cout << "Execution Successful!\n";
+        return 0;
+        */
+        
     } while(player.IsAlive());
     
     return 0;
-    */
+}
+
+void Turn(Player &player, Map &map) {
+    
+    map.Print(player);
+    
+    bool fail;
+    do {
+        fail = false;
+        
+        player.Turn();
+        
+        switch(player.GetChoice()) {
+            case MOVE:
+                map.Move(player, player.GetSubchoice());
+                break;
+            default:
+                std::cout << "ERROR: Could Not Deduce Player Choice. "
+                          << "Please Try Again.\n";
+                fail = true;
+                break;
+        }
+    } while(fail == true);
 }

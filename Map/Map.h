@@ -2,8 +2,7 @@
 #define MAP_H
 
 #include "../Land/Land.h"
-
-enum Direction {NORTH, SOUTH, EAST, WEST};
+#include "../Entity/Character.h"
 
 class Map {
     public:
@@ -29,7 +28,7 @@ class Map {
         Land* At(unsigned int x, unsigned int y) {return map[x][y].get();}
         
         //Move Character Across Map
-        void Move(Character *_char, Direction dir);
+        void Move(Character &_char, unsigned int dir);
         
         //Print Map in ASCII Characters
         void Print(Player &player);

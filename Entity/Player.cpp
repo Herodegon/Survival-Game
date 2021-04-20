@@ -1,5 +1,18 @@
 #include "Character.h"
 
+void Character::SetHealth(int health) {
+    
+    this->health = health;
+    
+    if(this->health < 0) {
+        this->health = 0;
+    }
+    
+    if(this->health > static_cast<int>(maxHealth)) {
+        this->health = maxHealth;
+    }
+}
+
 /*********************************************************/
 
 Player::Player() {
@@ -14,9 +27,9 @@ Player::Player() {
             maxThirst = thirst;
 }
 
-Player::Player(unsigned int health, 
-               unsigned int hunger, 
-               unsigned int thirst) {
+Player::Player(int health, 
+               int hunger, 
+               int thirst) {
                    
     this->health = health;
     maxHealth = health;
@@ -74,6 +87,32 @@ void Player::Turn() {
                 break;
         }
     } while(playerChoice == NOT_SPECIFIED);
+}
+
+void Player::SetHunger(int hunger) {
+    
+    this->hunger = hunger;
+    
+    if(this->hunger < 0) {
+        this->hunger = 0;
+    }
+    
+    if(this->hunger > static_cast<int>(maxHunger)) {
+        this->hunger = maxHunger;
+    }
+}
+
+void Player::SetThirst(int thirst) {
+    
+    this->thirst = thirst;
+    
+    if(this->thirst < 0) {
+        this->thirst = 0;
+    }
+    
+    if(this->thirst > static_cast<int>(maxThirst)) {
+        this->thirst = maxThirst;
+    }
 }
 
 void Player::MaxStatChange(StatChanges changeType, Stats stat) {

@@ -11,9 +11,11 @@ class Character : public Entity {
         virtual void Turn() = 0;
     
         //Adjust Character Health
-        void SetHealth(unsigned int health) {this->health = health;}
+        void SetHealth(int health);
         
-        unsigned int GetHealth() {return health;}
+        int GetHealth() {return health;}
+        
+        unsigned int GetMaxHealth() const {return maxHealth;}
         
         //Character Health Check
         bool IsAlive() const {return health;}
@@ -32,7 +34,9 @@ class Character : public Entity {
         unsigned int GetY() const {return coord[1];}
     
     protected:
-        unsigned int health;
+        int health;
+        
+        unsigned int maxHealth;
         
         unsigned int coord[2] = {0,0};
 };
@@ -53,26 +57,26 @@ class Player : public Character {
     public:
         Player();
         
-        Player(unsigned int health, 
-               unsigned int hunger, 
-               unsigned int thirst);
+        Player(int health, int hunger, int thirst);
         
         //Give Options and Get Player Input
         void Turn();
         
-        unsigned int GetChoice() const {return static_cast<int>(playerChoice);}
+        unsigned int GetChoice() const {return static_cast<unsigned int>(playerChoice);}
         unsigned int GetSubchoice() const {return subChoice;}
         
         //Use Player Stats
-        void SetHunger(unsigned int hunger) {this->hunger = hunger;}
-        void SetThirst(unsigned int thirst) {this->thirst = thirst;}
+        void SetHunger(int hunger);
+        void SetThirst(int thirst);
         
-        unsigned int GetHunger() const {return hunger;}
-        unsigned int GetThirst() const {return thirst;}
+        int GetHunger() const {return hunger;}
+        int GetThirst() const {return thirst;}
         
-        unsigned int GetMaxHealth() const {return maxHealth;}
         unsigned int GetMaxHunger() const {return maxHunger;}
         unsigned int GetMaxThirst() const {return maxThirst;}
+        
+        bool IsHungry() const {return hunger;}
+        bool IsThirsty() const {return thirst;}
         
         //Player Info
         void SetName(std::string name) {this->name = name;}
@@ -94,10 +98,9 @@ class Player : public Character {
         
         
     private:
-        unsigned int hunger;
-        unsigned int thirst;
+        int hunger;
+        int thirst;
         
-        unsigned int maxHealth;
         unsigned int maxHunger;
         unsigned int maxThirst;
         
@@ -105,7 +108,8 @@ class Player : public Character {
         Choices playerChoice = NOT_SPECIFIED;
         int subChoice = -1;
         
-        std::string name;
+        //Player Info
+        std::string name = "Player";
         std::string desc = "The Player";
         char symbol = '@';
 };
