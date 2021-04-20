@@ -21,8 +21,11 @@ class Map {
             BuildMap(player);
         }
         
+        //Access Member for Locations on Map
+        Land *At(unsigned int x, unsigned int y) {return &map[x][y];} 
+        
         //Print Map in ASCII Characters
-        void Print();
+        void Print(Player &player);
     
     private:
         Land **map;

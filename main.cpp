@@ -27,8 +27,6 @@
  * - Forest
  ********************************************************/
 
-#include <iostream>
-
 #include "Map/Map.h"
 
 //Clears Terminal
@@ -122,20 +120,31 @@ int main() {
     }
     */
     
+    /*
     std::cout << "Execution Success!\n";
     return 0;
+    */
     
-    /*---GAME START---
+    //---GAME START---
     Clear();
     
-    std::cout << "You wake up in a "
-              << map[player.GetX()][player.GetY()]->GetShortDesc()
-              << " with no memory of how you got there.\n" << std::endl;
+    map.Print(player);
     
+    std::cout << "You wake up in a "
+              << map.At(player.GetX(), player.GetY())->GetShortDesc()
+              << " with no memory of how you got there.\n" << std::endl;
+              
+    //Current Limits | End Of Program
+    std::cout << std::endl
+              << "Execution Successful!\n";
+    return 0;
+    
+    /*
     do {
+        //!Moved To Seperate Class
         //Print Map
         std::ostringstream thisMap;
-            
+        
         //Add Land Symbols to Map
         for(size_t i = 0; i < MAP_SIZE_Y; i++) {
             for(size_t k = 0; k < MAP_SIZE_X; k++) {

@@ -9,16 +9,12 @@ Land* GetRandomLand() {
     switch(selection) {
         case LAKE:
             return new Lake;
-            break;
         case FOREST:
             return new Forest;
-            break;
         case DESERT:
             return new Desert;
-            break;
         default:
             return new Forest;
-            break;
     }
 }
 

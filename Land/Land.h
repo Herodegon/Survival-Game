@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstdlib>
 #include <ctime>
+#include <memory>
 
 #include "../Entity/Character.h"
 
