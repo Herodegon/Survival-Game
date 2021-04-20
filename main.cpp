@@ -32,8 +32,15 @@
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
 
-void Turn() {
+void Turn(Player &player, Map &map) {
+    player.Turn();
     
+    switch(player.GetChoice()) {
+        case 0:
+            break;
+    }
+            
+    Map(player, player.GetSubchoice());
 }
 
 int main() {

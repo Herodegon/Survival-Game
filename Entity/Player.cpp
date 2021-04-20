@@ -30,7 +30,7 @@ Player::Player(unsigned int health,
 
 void Player::Turn() {
     playerChoice = NOT_SPECIFIED;
-    choiceValue = -1;
+    subChoice = -1;
     char userInput;
     
     do {    
@@ -49,22 +49,22 @@ void Player::Turn() {
                     std::cin >> userInput;
                     switch(userInput) {
                         case 'N':
-                            choiceValue = NORTH;
+                            subChoice = NORTH;
                             break;
                         case 'S':
-                            choiceValue = SOUTH;
+                            subChoice = SOUTH;
                             break;
                         case 'E':
-                            choiceValue = EAST;
+                            subChoice = EAST;
                             break;
                         case 'W':
-                            choiceValue = WEST;
+                            subChoice = WEST;
                             break;
                         default:
                             std::cout << "Please choose one of the options.\n";
                             break;
                     }
-                } while(choiceValue == -1);
+                } while(subChoice == -1);
                 break;
             case 'H':
                 std::cout << "For now, you can only \'M\'ove. Sorry :(\n";

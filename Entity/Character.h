@@ -60,7 +60,8 @@ class Player : public Character {
         //Give Options and Get Player Input
         void Turn();
         
-        Choices GetChoice() const {return playerChoice;}
+        unsigned int GetChoice() const {return static_cast<int>(playerChoice);}
+        unsigned int GetSubchoice() const {return subChoice;}
         
         //Use Player Stats
         void SetHunger(unsigned int hunger) {this->hunger = hunger;}
@@ -102,7 +103,7 @@ class Player : public Character {
         
         unsigned int playerCoord[2] = {0, 0};
         Choices playerChoice = NOT_SPECIFIED;
-        int choiceValue = -1;
+        int subChoice = -1;
         
         std::string name;
         std::string desc = "The Player";
