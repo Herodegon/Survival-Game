@@ -50,30 +50,23 @@ int main() {
               << map.At(player.GetX(), player.GetY())->GetShortDesc()
               << " with no memory of how you got there.\n" << std::endl;
               
-    /*!TEST Current Limits | End Of Program; REMOVE
-    std::cout << std::endl
-              << "Execution Successful!\n";
-    return 0;
-    */
+    std::cin.get();
+    std::cin.ignore();
     
     do {
+        Clear();
+        
+        map.Print(player);
+        
         Turn(player, map);
-        
-        /*!TEST End of File; REMOVE
-        std::cout << "Execution Successful!\n";
-        return 0;
-        */
-        
     } while(player.IsAlive());
     
     return 0;
 }
 
 void Turn(Player &player, Map &map) {
-    
-    map.Print(player);
-    
     bool fail;
+    
     do {
         fail = false;
         
@@ -90,4 +83,19 @@ void Turn(Player &player, Map &map) {
                 break;
         }
     } while(fail == true);
+    
+    //End of Turn
+    if(player.GetHunger() != 0) {
+        player.SetHunger(player.GetHunger()-1);
+    }
+    else {
+        player.SetHealth(player.GetHealth()-1);
+    }
+    
+    if(player.GetThirst() != 0) {
+        player.SetThirst(player.GetThirst()-1);
+    }
+    else {
+        player.SetHealth(player.GetHealth()-1);
+    }
 }
