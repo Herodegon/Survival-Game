@@ -36,6 +36,7 @@ std::string Lake::GetLongDesc() const {
 
 void Lake::Visit(Player &player) {
     int chance = rand() % 4;
+    char userInput;
     
     switch(chance) {
         case 0: //The Good Sip
@@ -68,7 +69,6 @@ void Lake::Visit(Player &player) {
             std::cout << "A bear is stalking the outskirts of the lake. "
                       << "You think it might be possible to sneak by.\n"
                       << "Do you \'S\'neak or \'R\'un?\n";
-            char userInput;
             
             do {
                 switch(userInput) {
@@ -118,12 +118,12 @@ std::string Forest::GetLongDesc() const {
 //!TODO: FINISH VISIT FUNCTION
 void Forest::Visit(Player &player) {
     int chance = rand() % 3;
+    char userInput;
     
     switch(chance) {
         case 0: //Nut A Chance
             std::cout << "You find a tree with nuts aplenty. Do you choose "
                       << "to \'T\'ake some, or \'W\'alk away?\n";
-            char userInput;
             
             do {
                 std::cin >> userInput;
@@ -186,6 +186,7 @@ std::string Desert::GetLongDesc() const {
 //!TODO: FINISH VISIT FUNCTION
 void Desert::Visit(Player &player) {
     int chance = rand() % 2;
+    char userInput;
     
     switch(chance) {
         case 0: //Scorpion Sting
@@ -195,7 +196,6 @@ void Desert::Visit(Player &player) {
                       << "is lost when you see a beautiful oasis far off into "
                       << "the distance. You contemplate \'H\'eading towards it, "
                       << "or \'T\'aking your chances in the heat.\n";
-            char userInput;
             
             do {
                 std::cin >> userInput;
@@ -261,7 +261,56 @@ std::string Plains::GetLongDesc() const {
 
 //!TODO: FINISH VISIT FUNCTION
 void Plains::Visit(Player &player) {
+    int chance = rand() % 1;
     
+    switch(chance) {
+        case 0: //In Passing
+            std::cout << "Passing through you come across a stanger. ";
+            
+            chance = (rand() % 100) + 1;
+            if(chance <= 90) {
+                std::cout << "It looks like they want to help. ";
+                
+                chance = rand() % 4;
+                switch(chance) {
+                    case 0:
+                        std::cout << "Out of generocity, they hand you "
+                                  << "a spare ration of food.\n";
+                        player.SetHunger(player.GetHunger()+1); 
+                        break;
+                    case 1:
+                        std::cout << "Out of generocity, they give you "
+                                  << "a sip of water from their canteen.\n";
+                        player.SetThirst(player.GetThirst()+1);
+                        break;
+                    case 2:
+                        std::cout << "Out of generocity, they patch you "
+                                  << "up with what medical supplies they have.\n";
+                        player.SetHealth(player.GetHealth()+1);
+                        break;
+                    case 3:
+                        std::cout << "Unfortunatley, they don't have anything "
+                                  << "to help you with.\n";
+                        break;
+                }
+            }
+            else {
+                std::cout << "It's a bandit! ";
+                
+                chance = (rand() % 100) + 1;
+                if(chance <= 60) {
+                    std::cout << "You narrowly dodge their attack, and dash "
+                              << "for the lands ahead.\n";
+                }
+                else {
+                    std::cout << "They beat you down, and take what little you have.\n";
+                    player.SetHealth(player.GetHealth()-1);
+                    player.SetHunger(player.GetHunger()-1);
+                    player.SetThirst(player.GetThirst()-1);
+                }
+            }
+            break;
+    }
 }
 
 /************************************************************/
@@ -276,5 +325,74 @@ std::string Cave::GetLongDesc() const {
 
 //!TODO: FINISH VISIT FUNCTION
 void Cave::Visit(Player &player) {
+    int chance = rand() % 2;
+    char userInput;
     
+    switch(chance) {
+        case 0:  //Let There Be Light
+            {
+                std::cout << "As you make your way deeper and deeper into the cave, "
+                          << "the darkness around you continues to grow. Before you "
+                          << "know it you can barely make out what's in front of you. "
+                          << "You get to a fork in the cave, but can't see what's on "
+                          << "either side. Which way do you want to go: \'L\'eft or "
+                          << "\'R\'ight?\n";
+                bool isRight = (rand() % 2);
+                
+                std::cin >> userInput;
+                bool guess = (userInput == 'R');
+                
+                if(guess == isRight) {
+                    std::cout << "You gradually start to see light peek in from the "
+                              << "distance, and before you know it you're out of the "
+                              << "cave.\n";
+                }
+                else {
+                    std::cout << "The cave only gets deeper as you go farther and "
+                              << "farther. You eventually make it out of the cave, "
+                              << "but without any idea of how long you were in there.\n";
+                    player.SetHunger(player.GetHunger()-1);
+                    player.SetThirst(player.GetThirst()-1);
+                }
+            }
+            break;
+        case 1: //Mystery Mushroom
+            std::cout << "You come across a patch of strange-looking mushrooms. "
+                      << "Do you \'E\'at one, or \'I\'gnore them?\n";
+            char userInput;
+            
+            std::cin >> userInput;
+            switch(userInput) {
+                case 'E':
+                    std::cout << "You eat one of the mushrooms. ";
+                    
+                    chance = (rand() % 100) + 1;
+                    if(chance <= 50) {
+                        std::cout << "It has a horrible taste. In fact, you "
+                                  << "start to feel a little ill.\n";
+                        player.SetHealth(player.GetHealth()-1);
+                        player.SetHunger(player.GetHunger()-1);
+                        player.SetThirst(player.GetThirst()-1);
+                    }
+                    else if(chance <= 95) {
+                        std::cout << "It was surprisingly good! You feel "
+                                  << "invigorated.\n";
+                        player.SetHealth(player.GetHealth()+1);
+                        player.SetHunger(player.GetHunger()+1);
+                        player.SetThirst(player.GetThirst()+1);
+                    }
+                    else {
+                        std::cout << "It was horrendous! You spit the "
+                                  << "mushroom out, but quickly drop to "
+                                  << "your knees as the poison takes hold.\n";
+                        player.SetHealth(0);
+                    }
+                    break;
+                case 'I':
+                    std::cout << "You pass up the mushrooms and make your "
+                              << "way out of the cave.\n";
+                    break;
+            }
+            break;
+    }
 }
