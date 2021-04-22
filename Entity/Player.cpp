@@ -165,6 +165,9 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
                 case THIRST:
                     maxThirst++;
                     break;
+                default:
+                    std::cout << "ERROR: Max Stat Not Found\n";
+                    break;
             }
             break;
             
@@ -181,6 +184,9 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
                 case THIRST:
                     maxThirst--;
                     break;
+                default:
+                    std::cout << "ERROR: Max Stat Not Found\n";
+                    break;
             }
             break;
     }
@@ -188,7 +194,36 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
 
 //Displays Player Stats 
 void Player::PrintStats() {
-    std::cout << "Health: " << health
-              << "Hunger: " << hunger
-              << "Thirst: " << thirst;
+    
+    for(unsigned int i = 0; i < NUM_STATS; i++) {
+        Stats stat = static_cast<Stats>(i);
+        int statPoints;
+        
+        switch(stat) {
+            case HEALTH:
+                std::cout << "Health: ";
+                statPoints = health;
+            case HUNGER:
+                std::cout << "Hunger: ";
+                statPoints = hunger;
+            case THIRST:
+                std::cout << "Thirst: ";
+                statPoints = thirst;
+            default:
+                std::cout << "ERROR: Exceeded Max Number of Stats!\n";
+                return;
+        }
+        
+        for(int k = 0; k < statPoints; k++) {
+            
+            switch(k % 2) {
+                case 0:
+                    std::cout << "[";
+                    break;
+                case 1:
+                    std::cout << "]";
+            }
+            std::cout << std::endl;
+        }
+    }
 }

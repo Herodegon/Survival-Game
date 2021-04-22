@@ -3,7 +3,7 @@
 
 #include "Entity.h"
 
-enum CharacterTypes {PLAYER, ANIMAL, NPC, MAX_NUM_CHARS};
+enum CharacterTypes {PLAYER, ANIMAL, NPC, NUM_CHARS};
 
 class Character : public Entity {
     public:
@@ -44,7 +44,7 @@ class Character : public Entity {
 /*********************************************************/
 
 //Player Stats
-enum Stats {HEALTH, HUNGER, THIRST};
+enum Stats {HEALTH, HUNGER, THIRST, NUM_STATS};
 enum StatChanges {UPGRADE, DOWNGRADE};
 
 //Player Actions

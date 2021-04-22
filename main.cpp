@@ -46,7 +46,8 @@ int main() {
     
     std::cout << "You wake up in a "
               << map.At(player.GetX(), player.GetY())->GetShortDesc()
-              << " with no memory of how you got there.\n" << std::endl;
+              << " with no memory of how you got there.\n"
+              << std::endl << "Press \'ENTER\' to continue...\n";
               
     std::cin.get();
     std::cin.ignore();
@@ -61,6 +62,14 @@ int main() {
         
         //Executes Random Land Event
         map.At(player.GetX(), player.GetY())->Visit(player);
+        
+        //Print Player Stats, and Confirm Next Turn
+        player.PrintStats();
+        
+        std::cout << std::endl << "Press \'ENTER\' to continue...\n";
+        
+        std::cin.get();
+        std::cin.ignore();
     } while(player.IsAlive());
     
     return 0;
