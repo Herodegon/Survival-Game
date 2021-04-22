@@ -18,7 +18,7 @@ class Character : public Entity {
         unsigned int GetMaxHealth() const {return maxHealth;}
         
         //Character Health Check
-        bool IsAlive() const {return health;}
+        bool IsAlive() const;
         
         //Set Full Coordinate
         void SetCoord(unsigned int x, unsigned int y = 0) {
@@ -75,8 +75,9 @@ class Player : public Character {
         unsigned int GetMaxHunger() const {return maxHunger;}
         unsigned int GetMaxThirst() const {return maxThirst;}
         
-        bool IsHungry() const {return hunger;}
-        bool IsThirsty() const {return thirst;}
+        //Player Stat Checks
+        bool IsHungry() const;
+        bool IsThirsty() const;
         
         //Player Info
         void SetName(std::string name) {this->name = name;}

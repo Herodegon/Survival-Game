@@ -81,6 +81,42 @@ void Map::BuildMap(Player &player) {
     }
 }
 
+void Map::Turn(Player &player) {
+    bool fail;
+    
+    do {
+        fail = false;
+        
+        player.Turn();
+        
+        switch(player.GetChoice()) {
+            case MOVE:
+                Move(player, player.GetSubchoice());
+                break;
+            default:
+                std::cout << "ERROR: Could Not Deduce Player Choice. "
+                          << "Please Try Again.\n";
+                fail = true;
+                break;
+        }
+    } while(fail == true);
+    
+    //End of Turn
+    if(player.GetHunger() != 0) {
+        player.SetHunger(player.GetHunger()-1);
+    }
+    else {
+        player.SetHealth(player.GetHealth()-1);
+    }
+    
+    if(player.GetThirst() != 0) {
+        player.SetThirst(player.GetThirst()-1);
+    }
+    else {
+        player.SetHealth(player.GetHealth()-1);
+    }
+}
+
 void Map::Move(Character &_char, unsigned int dir) {
     
     Choices_Move move = static_cast<Choices_Move>(dir);

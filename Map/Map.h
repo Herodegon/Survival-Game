@@ -24,6 +24,9 @@ class Map {
             BuildMap(player);
         }
         
+        //Runs Main Turn
+        void Turn(Player &player);
+        
         //Access Function for Lands in Map
         Land* At(unsigned int x, unsigned int y) {return map[x][y].get();}
         

@@ -54,16 +54,21 @@ int main() {
     std::cin.ignore();
     
     do {
+        //Clears Screen and Prints ASCII Map
         Clear();
-        
         map.Print(player);
         
-        Turn(player, map);
+        //Runs Main Turn
+        map.Turn(player);
+        
+        //Executes Random Land Event
+        map.At(player.GetX(), player.GetY())->Visit(player);
     } while(player.IsAlive());
     
     return 0;
 }
 
+/*!Moved to Class Function (Map.h); REMOVE
 void Turn(Player &player, Map &map) {
     bool fail;
     
@@ -99,3 +104,4 @@ void Turn(Player &player, Map &map) {
         player.SetHealth(player.GetHealth()-1);
     }
 }
+*/

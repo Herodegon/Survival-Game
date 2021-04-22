@@ -13,6 +13,17 @@ void Character::SetHealth(int health) {
     }
 }
 
+//Returns True if Player Still Has Health Left
+bool Character::IsAlive() const {
+    
+    switch(health > 0) {
+        case true:
+            return true;
+        case false:
+            return false;
+    }
+}
+
 /*********************************************************/
 
 Player::Player() {
@@ -115,9 +126,33 @@ void Player::SetThirst(int thirst) {
     }
 }
 
+//Returns True if Player is Starving
+bool Player::IsHungry() const {
+    
+    switch(hunger == 0) {
+        case true:
+            return true;
+        case false:
+            return false;
+    }
+}
+
+//Returns True if Player is Thirsty
+bool Player::IsThirsty() const {
+    
+    switch(thirst == 0) {
+        case true:
+            return true;
+        case false:
+            return false;
+    }
+}
+
+//Either Upgrades or Downgrades One of Player's Max Stats
 void Player::MaxStatChange(StatChanges changeType, Stats stat) {
+    
     switch(changeType) {
-        case UPGRADE:
+        case UPGRADE: //Stat Upgrade
             switch(stat) {
                 case HEALTH:
                     maxHealth++;
@@ -131,10 +166,9 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
                     maxThirst++;
                     break;
             }
-                
             break;
             
-        case DOWNGRADE:
+        case DOWNGRADE: //Stat Downgrade
             switch(stat) {
                 case HEALTH:
                     maxHealth--;
@@ -148,11 +182,11 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
                     maxThirst--;
                     break;
             }
-                
             break;
     }
 }
 
+//Displays Player Stats 
 void Player::PrintStats() {
     std::cout << "Health: " << health
               << "Hunger: " << hunger
