@@ -2,25 +2,26 @@
 
 enum LandTypes {LAKE, FOREST, DESERT, PLAINS, CAVE, MAX_LAND_TYPES};
 
-std::unique_ptr<Land> GetRandomLand() {
+Land* GetRandomLand() {
     LandTypes selection = (LandTypes)(rand() % MAX_LAND_TYPES);
     
-    //!TEST selection; REMOVE
+    /*!TEST selection; REMOVE
     std::cout << "Selection: " << selection << std::endl;
+    */
     
     switch(selection) {
         case LAKE:
-            return std::make_unique<Lake>();
+            return new Lake;
         case FOREST:
-            return std::make_unique<Forest>();
+            return new Forest;
         case DESERT:
-            return std::make_unique<Desert>();
+            return new Desert;
         case PLAINS:
-            return std::make_unique<Plains>();
+            return new Plains;
         case CAVE:
-            return std::make_unique<Cave>();
+            return new Cave;
         default:
-            return std::make_unique<Forest>();
+            return new Lake;
     }
 }
 
@@ -115,7 +116,6 @@ std::string Forest::GetLongDesc() const {
     return "You arrive at a thick brush of trees. ";
 }
 
-//!TODO: FINISH VISIT FUNCTION
 void Forest::Visit(Player &player) {
     int chance = rand() % 3;
     char userInput;
@@ -361,38 +361,44 @@ void Cave::Visit(Player &player) {
                       << "Do you \'E\'at one, or \'I\'gnore them?\n";
             char userInput;
             
-            std::cin >> userInput;
-            switch(userInput) {
-                case 'E':
-                    std::cout << "You eat one of the mushrooms. ";
-                    
-                    chance = (rand() % 100) + 1;
-                    if(chance <= 50) {
-                        std::cout << "It has a horrible taste. In fact, you "
-                                  << "start to feel a little ill.\n";
-                        player.SetHealth(player.GetHealth()-1);
-                        player.SetHunger(player.GetHunger()-1);
-                        player.SetThirst(player.GetThirst()-1);
-                    }
-                    else if(chance <= 95) {
-                        std::cout << "It was surprisingly good! You feel "
-                                  << "invigorated.\n";
-                        player.SetHealth(player.GetHealth()+1);
-                        player.SetHunger(player.GetHunger()+1);
-                        player.SetThirst(player.GetThirst()+1);
-                    }
-                    else {
-                        std::cout << "It was horrendous! You spit the "
-                                  << "mushroom out, but quickly drop to "
-                                  << "your knees as the poison takes hold.\n";
-                        player.SetHealth(0);
-                    }
-                    break;
-                case 'I':
-                    std::cout << "You pass up the mushrooms and make your "
-                              << "way out of the cave.\n";
-                    break;
-            }
+            do {
+                std::cin >> userInput;
+                switch(userInput) {
+                    case 'E':
+                        std::cout << "You eat one of the mushrooms. ";
+                        
+                        chance = (rand() % 100) + 1;
+                        if(chance <= 50) {
+                            std::cout << "It has a horrible taste. In fact, you "
+                                      << "start to feel a little ill.\n";
+                            player.SetHealth(player.GetHealth()-1);
+                            player.SetHunger(player.GetHunger()-1);
+                            player.SetThirst(player.GetThirst()-1);
+                        }
+                        else if(chance <= 95) {
+                            std::cout << "It was surprisingly good! You feel "
+                                      << "invigorated.\n";
+                            player.SetHealth(player.GetHealth()+1);
+                            player.SetHunger(player.GetHunger()+1);
+                            player.SetThirst(player.GetThirst()+1);
+                        }
+                        else {
+                            std::cout << "It was horrendous! You spit the "
+                                      << "mushroom out, but quickly drop to "
+                                      << "your knees as the poison takes hold.\n";
+                            player.SetHealth(0);
+                        }
+                        break;
+                    case 'I':
+                        std::cout << "You pass up the mushrooms and make your "
+                                  << "way out of the cave.\n";
+                        break;
+                    default:
+                        std::cout << "Please enter \'T\' or \'W\'.\n";
+                        userInput = '!'; //Input Error Flag
+                        break; 
+                }
+            } while(userInput == '!');
             break;
     }
 }

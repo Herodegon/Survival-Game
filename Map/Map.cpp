@@ -57,23 +57,26 @@ void Map::BuildMap(Player &player) {
     unsigned int playerSpawn_Y = rand() % map_Y;
     player.SetCoord(playerSpawn_X, playerSpawn_Y);
     
-    //!TEST player spawn; REMOVE
+    /*!TEST player spawn; REMOVE
     std::cout << "Player Spawn: (" << playerSpawn_X << ", "
               << playerSpawn_Y << ")" << std::endl;
+    */
     
     for(size_t i = 0; i < map_Y; i++) {
         for(size_t k = 0; k < map_X; k++) {
             
-            //!TEST iteration; REMOVE
+            /*!TEST iteration; REMOVE
             std::cout << "BuildMap [" << k << "][" << i << "]" << std::endl;
+            */
             
             map[k][i] = GetRandomLand();
             
-            //!TEST land; REMOVE
+            /*!TEST land; REMOVE
             std::cout << "Symbol: \'" << map[k][i]->GetSymbol() << "\'" << std::endl
                       << std::endl;
+            */
             
-            //!TEST failsafe; REMOVE
+            //!Failsafe
             if(k > 100) {
                 break;
             }
@@ -173,10 +176,11 @@ void Map::Print(Player &player) {
             
             //Check if current coord is player
                 
-            //!TEST loop; REMOVE
+            /*!TEST loop; REMOVE
             std::cout << "Iteration [" << k << "][" << i << "]" << std::endl
                       << "Symbol: \'" << map[k][i]->GetSymbol() << "\'" << std::endl
                       << std::endl;
+            */
             
             if((player.GetX() == k) && (player.GetY() == i)) {
                 thisMap << player.GetSymbol();

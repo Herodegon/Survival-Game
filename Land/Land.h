@@ -7,7 +7,6 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
-#include <memory>
 
 #include "../Entity/Character.h"
 
@@ -99,6 +98,6 @@ class Cave : public Land {
         char symbol = 'C';
 };
 
-std::unique_ptr<Land> GetRandomLand();
+Land* GetRandomLand();
 
 #endif

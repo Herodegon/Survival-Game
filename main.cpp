@@ -32,8 +32,6 @@
 //Clears Terminal
 void Clear() {for(int i = 0; i < 50; i++) {std::cout << std::endl;}}
 
-void Turn(Player &player, Map &map);
-
 int main() {
     srand(time(NULL));
     

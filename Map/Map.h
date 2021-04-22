@@ -10,9 +10,10 @@ class Map {
             //Choose Map Size and Generate Map Layout
             ChooseMapSize();
             
-            //!TEST mapsize; REMOVE
+            /*!TEST mapsize; REMOVE
             std::cout << "Map Size X: " << map_X << std::endl
                       << "Map Size Y: " << map_Y << std::endl;
+            */
             
             //Create Map Array Using Size Parameters
             map.resize(map_X);
@@ -28,7 +29,7 @@ class Map {
         void Turn(Player &player);
         
         //Access Function for Lands in Map
-        Land* At(unsigned int x, unsigned int y) {return map[x][y].get();}
+        Land* At(unsigned int x, unsigned int y) {return map[x][y];}
         
         //Move Character Across Map
         void Move(Character &_char, unsigned int dir);
@@ -37,7 +38,7 @@ class Map {
         void Print(Player &player);
     
     private:
-        std::vector<std::vector<std::unique_ptr<Land>>> map;
+        std::vector<std::vector<Land*>> map;
         
         unsigned int map_X;
         unsigned int map_Y;
