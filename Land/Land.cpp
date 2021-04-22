@@ -104,6 +104,7 @@ void Lake::Visit(Player &player) {
                 }
             } while(userInput == '!');
     }
+    std::cout << std::endl;
 }
 
 /************************************************************/
@@ -171,6 +172,7 @@ void Forest::Visit(Player &player) {
             player.SetThirst(player.GetThirst()+1);
             break;
     }
+    std::cout << std::endl;
 }
 
 /************************************************************/
@@ -183,13 +185,34 @@ std::string Desert::GetLongDesc() const {
     return "You arrive at a vast desert. ";
 }
 
-//!TODO: FINISH VISIT FUNCTION
 void Desert::Visit(Player &player) {
     int chance = rand() % 2;
     char userInput;
     
     switch(chance) {
         case 0: //Scorpion Sting
+            std::cout << "A scorpion sneaks up on you and stings you "
+                      << "in the foot. ";
+            player.SetHealth(player.GetHealth()-1);
+            
+            chance = (rand() % 100) + 1;
+            if(chance <= 70) {
+                std::cout << "On the bright side, you manage to "
+                          << "find and kill a lizard. It isn't the tastiest, but "
+                          << "it's better than nothing.\n";
+                player.SetHunger(player.GetHunger()+2);
+            }
+            else if(chance <= 95) {
+                std::cout << "On the bright side, you find a cactus with "
+                          << "prickly pear fruit! You cut a few of the pods open, "
+                          << "and eat the sweet-tasting insides.\n";
+                player.SetHunger(player.GetHunger()+1);
+                player.SetThirst(player.GetThirst()+1);
+            }
+            else {
+                std::cout << "You mutter some unsavory words as you "
+                          << "carry on your way.\n";
+            }
             break;
         case 1: //Miracle Mirage
             std::cout << "The heat has you pinned down. You think all hope "
@@ -247,6 +270,7 @@ void Desert::Visit(Player &player) {
             } while(userInput == '!');
             break;
     }
+    std::cout << std::endl;
 }
 
 /************************************************************/
@@ -259,7 +283,6 @@ std::string Plains::GetLongDesc() const {
     return "You arrive at an endless expanse of hills and grass. ";
 }
 
-//!TODO: FINISH VISIT FUNCTION
 void Plains::Visit(Player &player) {
     int chance = rand() % 1;
     
@@ -311,6 +334,7 @@ void Plains::Visit(Player &player) {
             }
             break;
     }
+    std::cout << std::endl;
 }
 
 /************************************************************/
@@ -323,7 +347,6 @@ std::string Cave::GetLongDesc() const {
     return "You arrive at the entrance to a dark, damp cave. ";
 }
 
-//!TODO: FINISH VISIT FUNCTION
 void Cave::Visit(Player &player) {
     int chance = rand() % 2;
     char userInput;
@@ -401,4 +424,5 @@ void Cave::Visit(Player &player) {
             } while(userInput == '!');
             break;
     }
+    std::cout << std::endl;
 }

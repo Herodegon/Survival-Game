@@ -32,7 +32,7 @@ class Map {
         Land* At(unsigned int x, unsigned int y) {return map[x][y];}
         
         //Move Character Across Map
-        void Move(Character &_char, unsigned int dir);
+        void Move(Player &player, unsigned int dir);
         
         //Print Map in ASCII Characters
         void Print(Player &player);

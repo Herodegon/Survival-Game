@@ -103,67 +103,67 @@ void Map::Turn(Player &player) {
                 break;
         }
     } while(fail == true);
-    
-    //End of Turn
-    if(player.GetHunger() != 0) {
-        player.SetHunger(player.GetHunger()-1);
-    }
-    else {
-        player.SetHealth(player.GetHealth()-1);
-    }
-    
-    if(player.GetThirst() != 0) {
-        player.SetThirst(player.GetThirst()-1);
-    }
-    else {
-        player.SetHealth(player.GetHealth()-1);
-    }
 }
 
-void Map::Move(Character &_char, unsigned int dir) {
+void Map::Move(Player &player, unsigned int dir) {
     
     Choices_Move move = static_cast<Choices_Move>(dir);
     switch(move) {
         case NORTH:
             //If player is not at the top of the map
-            if(_char.GetY() != map[_char.GetX()].size() - 1) {
-                _char.SetY(_char.GetY() - 1);
+            if(player.GetY() != 0) {
+                player.SetY(player.GetY() - 1);
             }
             //Else, set them at the bottom
             else {
-                _char.SetY(map[_char.GetX()].size() - 1);
+                player.SetY(map[player.GetX()].size() - 1);
             }
             break;
         case SOUTH:
             //If player is not at the bottom of the map
-            if(_char.GetY() != 0) {
-                _char.SetY(_char.GetY() + 1);
+            if(player.GetY() != map[player.GetX()].size() - 1) {
+                player.SetY(player.GetY() + 1);
             }
             //Else, set them at the top
             else {
-                _char.SetY(0);
+                player.SetY(0);
             }
             break;
         case EAST:
             //If player is not at the far right of the map
-            if(_char.GetX() != map.size() - 1) {
-                _char.SetX(_char.GetX() + 1);
+            if(player.GetX() != map.size() - 1) {
+                player.SetX(player.GetX() + 1);
             }
             //Else, set them at the far left
             else {
-                _char.SetX(0);
+                player.SetX(0);
             }
             break;
         case WEST:
             //If player is not at the far left of the map
-            if(_char.GetX() != 0) {
-                _char.SetX(_char.GetX() - 1);
+            if(player.GetX() != 0) {
+                player.SetX(player.GetX() - 1);
             }
             //Else, set them at the far right
             else {
-                _char.SetX(map.size() - 1);
+                player.SetX(map.size() - 1);
             }
             break;
+    }
+    
+    //Move Exhaustion
+    if(player.IsHungry()) { //If Player is Hungry, Remove 1 Health
+        player.SetHealth(player.GetHealth()-1);
+    }
+    else {
+        player.SetHunger(player.GetHunger()-1);
+    }
+    
+    if(player.IsThirsty()) { //If Player is Thirsty, Remove 1 Health
+        player.SetHealth(player.GetHealth()-1);
+    }
+    else {
+        player.SetThirst(player.GetThirst()-1);
     }
 }
 

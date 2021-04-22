@@ -72,7 +72,7 @@ int main() {
         map.At(player.GetX(), player.GetY())->Visit(player);
         
         //Confirms End of Turn
-        std::cout << std::endl << "Press \'ENTER\' to continue...\n";
+        std::cout << "Press \'ENTER\' to continue...\n";
         
         std::cin.get();
         std::cin.ignore();
