@@ -20,6 +20,9 @@ class Character : public Entity {
         //Character Health Check
         bool IsAlive() const;
         
+        //Print Character Stats
+        virtual void PrintStats() const = 0;
+        
         //Set Full Coordinate
         void SetCoord(unsigned int x, unsigned int y = 0) {
             SetX(x);
@@ -44,7 +47,7 @@ class Character : public Entity {
 /*********************************************************/
 
 //Player Stats
-enum Stats {HEALTH, HUNGER, THIRST, NUM_STATS};
+enum PlayerStats {HEALTH, HUNGER, THIRST, NUM_STATS};
 enum StatChanges {UPGRADE, DOWNGRADE};
 
 //Player Actions
@@ -87,16 +90,14 @@ class Player : public Character {
         char GetSymbol() const {return symbol;}
         
         //Upgrade Stats
-        void MaxStatChange(StatChanges changeType, Stats stat);
+        void MaxStatChange(StatChanges changeType, PlayerStats stat);
         
         //Output Player Stats
-        void PrintStats();
+        void PrintStats() const;
         
-        static unsigned int const DEFAULT_HEALTH = 3;
-        static unsigned int const DEFAULT_HUNGER = 10;
-        static unsigned int const DEFAULT_THIRST = 5;
-        
-        
+        static unsigned int const DEFAULT_HEALTH = 5;
+        static unsigned int const DEFAULT_HUNGER = 8;
+        static unsigned int const DEFAULT_THIRST = 8;
         
     private:
         int hunger;

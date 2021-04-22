@@ -57,26 +57,29 @@ int main() {
         Clear();
         map.Print(player);
         
-        //!TEST player stats; REMOVE
+        //Prints Player Stats and Executes Players Turn Phase
+        player.PrintStats();
+        map.Turn(player);
+        
+        /*!TEST player stats; REMOVE
         std::cout << "Health: " << player.GetHealth() << std::endl
                   << "Hunger: " << player.GetHunger() << std::endl
                   << "Thirst: " << player.GetThirst() << std::endl
                   << std::endl;
-        
-        //Runs Main Turn
-        map.Turn(player);
+        */
         
         //Executes Random Land Event
         map.At(player.GetX(), player.GetY())->Visit(player);
         
-        //Print Player Stats, and Confirm Next Turn
-        player.PrintStats();
-        
+        //Confirms End of Turn
         std::cout << std::endl << "Press \'ENTER\' to continue...\n";
         
         std::cin.get();
         std::cin.ignore();
     } while(player.IsAlive());
+    
+    std::cout << "You succumb to your exhaustion.\n"
+              << std::endl;
     
     return 0;
 }

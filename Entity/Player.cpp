@@ -149,7 +149,7 @@ bool Player::IsThirsty() const {
 }
 
 //Either Upgrades or Downgrades One of Player's Max Stats
-void Player::MaxStatChange(StatChanges changeType, Stats stat) {
+void Player::MaxStatChange(StatChanges changeType, PlayerStats stat) {
     
     switch(changeType) {
         case UPGRADE: //Stat Upgrade
@@ -193,27 +193,32 @@ void Player::MaxStatChange(StatChanges changeType, Stats stat) {
 }
 
 //Displays Player Stats 
-void Player::PrintStats() {
+void Player::PrintStats() const {
     
     for(unsigned int i = 0; i < NUM_STATS; i++) {
-        Stats stat = static_cast<Stats>(i);
+        PlayerStats stat = static_cast<PlayerStats>(i);
         int statPoints;
         
+        //Choose Stat
         switch(stat) {
             case HEALTH:
                 std::cout << "Health: ";
                 statPoints = health;
+                break;
             case HUNGER:
                 std::cout << "Hunger: ";
                 statPoints = hunger;
+                break;
             case THIRST:
                 std::cout << "Thirst: ";
                 statPoints = thirst;
+                break;
             default:
-                std::cout << "ERROR: Exceeded Max Number of Stats!\n";
+                std::cout << "ERROR: Exceeded Num of Player Stats!\n";
                 return;
         }
         
+        //Print Out Stat Number in Increments of 2 as Squares
         for(int k = 0; k < statPoints; k++) {
             
             switch(k % 2) {
@@ -223,7 +228,8 @@ void Player::PrintStats() {
                 case 1:
                     std::cout << "]";
             }
-            std::cout << std::endl;
         }
+        std::cout << std::endl; //Move to next stat
     }
+    std::cout << std::endl;
 }
