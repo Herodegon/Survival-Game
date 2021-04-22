@@ -252,11 +252,11 @@ void Desert::Visit(Player &player) {
 /************************************************************/
 
 std::string Plains::GetShortDesc() const {
-    return "Desert";
+    return "Plain";
 }
 
 std::string Plains::GetLongDesc() const {
-    return "You arrive at a vast desert. ";
+    return "You arrive at an endless expanse of hills and grass. ";
 }
 
 //!TODO: FINISH VISIT FUNCTION
@@ -316,11 +316,11 @@ void Plains::Visit(Player &player) {
 /************************************************************/
 
 std::string Cave::GetShortDesc() const {
-    return "Desert";
+    return "Cave";
 }
 
 std::string Cave::GetLongDesc() const {
-    return "You arrive at a vast desert. ";
+    return "You arrive at the entrance to a dark, damp cave. ";
 }
 
 //!TODO: FINISH VISIT FUNCTION
