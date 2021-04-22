@@ -57,6 +57,12 @@ int main() {
         Clear();
         map.Print(player);
         
+        //!TEST player stats; REMOVE
+        std::cout << "Health: " << player.GetHealth() << std::endl
+                  << "Hunger: " << player.GetHunger() << std::endl
+                  << "Thirst: " << player.GetThirst() << std::endl
+                  << std::endl;
+        
         //Runs Main Turn
         map.Turn(player);
         
@@ -74,41 +80,3 @@ int main() {
     
     return 0;
 }
-
-/*!Moved to Class Function (Map.h); REMOVE
-void Turn(Player &player, Map &map) {
-    bool fail;
-    
-    do {
-        fail = false;
-        
-        player.Turn();
-        
-        switch(player.GetChoice()) {
-            case MOVE:
-                map.Move(player, player.GetSubchoice());
-                break;
-            default:
-                std::cout << "ERROR: Could Not Deduce Player Choice. "
-                          << "Please Try Again.\n";
-                fail = true;
-                break;
-        }
-    } while(fail == true);
-    
-    //End of Turn
-    if(player.GetHunger() != 0) {
-        player.SetHunger(player.GetHunger()-1);
-    }
-    else {
-        player.SetHealth(player.GetHealth()-1);
-    }
-    
-    if(player.GetThirst() != 0) {
-        player.SetThirst(player.GetThirst()-1);
-    }
-    else {
-        player.SetHealth(player.GetHealth()-1);
-    }
-}
-*/
