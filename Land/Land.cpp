@@ -70,7 +70,9 @@ void Lake::Visit(Player &player) {
             std::cout << "A bear is stalking the outskirts of the lake. "
                       << "You think it might be possible to sneak by.\n"
                       << "Do you \'S\'neak or \'R\'un?\n";
-            
+                      
+                      
+            std::cin >> userInput;
             do {
                 switch(userInput) {
                     case 'S':
